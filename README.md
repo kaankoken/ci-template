@@ -143,6 +143,8 @@ The rest of the customization totally depend on a project.
 > You have to enable `pages` for your github account or for the organization.
 > Please visit [here](https://pages.github.com) to start.
 
+- Create `github-pages` for this repository
+
 ```bash
 # checkout gh-pages branch from master
 git checkout --orphan gh-pages
@@ -168,3 +170,8 @@ git add .
 git commit -m "initial commit"
 git push
 ```
+
+- Create `svg` badge with various tool & upload to `gh-pages` branch
+- Add to your `Readme`
+
+[![Coverage](https://raw.githubusercontent.com/kaankoken/ci-template/gh-pages/badge.svg)](https://kaankoken.github.io/ci-template/)
