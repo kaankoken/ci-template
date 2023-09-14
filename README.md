@@ -85,7 +85,7 @@ For newer versions:
 <summary>Kotlin DSL</summary>
 
 ```kotlin
-/* build.gradle (android/my-application)*/
+* build.gradle (android/my-application)*/
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
     ...
@@ -135,3 +135,36 @@ The both of the workflows work in a similar fashion:
 - They will create a PR for the changed files.
 
 The rest of the customization totally depend on a project.
+
+## Github Pages for a badge/test results
+
+> **Note**
+>
+> You have to enable `pages` for your github account or for the organization.
+> Please visit [here](https://pages.github.com) to start.
+
+```bash
+# checkout gh-pages branch from master
+git checkout --orphan gh-pages
+
+# Remove all files in this branch except `.git`
+find /path/to/your/folder/ -not -path '/path/to/your/folder/.git/*' -delete
+
+# Add index.html
+touch index.html
+
+echo "<!DOCTYPE html>" > index.html
+echo "<html>" >> index.html
+echo "  <head>" >> index.html
+echo "    <title>My HTML Page</title>" >> index.html
+echo "  </head>" >> index.html
+echo "  <body>" >> index.html
+echo "    <h1>Hello, World!</h1>" >> index.html
+echo "  </body>" >> index.html
+echo "</html>" >> index.html
+
+# Commit the changes & push
+git add .
+git commit -m "initial commit"
+git push
+```
