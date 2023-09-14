@@ -25,6 +25,13 @@ The actions either require PAT or Github App to handle automated PRs & (pre)rele
 > `https://github.com/organizations/your-organization/settings/actions` or
 > `https://github.com/user-name/repo-name/settings/actions`
 
+> **Note**
+>
+> If you are getting `Resource not accessible by integration`
+> Please give `Read & Write` permission to `Workflow permissions` from
+> `https://github.com/organizations/your-organization/settings/actions` or
+> `https://github.com/user-name/repo-name/settings/actions`
+
 - Add [cocogitto](https://github.com/cocogitto/cocogitto-bot) to report conventional-commits mistake as commend to opened pull-request.
 
 ## CI
