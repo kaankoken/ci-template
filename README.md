@@ -171,7 +171,7 @@ git push
 ```
 
 - Create `svg` badge with various tool & upload to `gh-pages` branch
-- Add bagde to your `Readme`
+- Add badge to your `Readme`
 
 ```md
 [![Coverage](https://raw.githubusercontent.com/kaankoken/ci-template/gh-pages/badge.svg)](https://kaankoken.github.io/ci-template/)
