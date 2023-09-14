@@ -212,9 +212,9 @@ Developer Settings > Github Apps > Edit > Install App > <Org-or-GH-User> > Only 
 You need to get `Github App` two fields of information to set repository's secret previously select.
 
 - App-Id
-- Client-Secret
+- private-key
 
 Add those to repository secret as
 
 - APP_ID = App_id
-- APP = Client-Secret
+- APP = private-key
