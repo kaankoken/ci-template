@@ -176,3 +176,38 @@ git push
 ```md
 [![Coverage](https://raw.githubusercontent.com/kaankoken/ci-template/gh-pages/badge.svg)](https://kaankoken.github.io/ci-template/)
 ```
+
+## Github App
+
+> **Note**
+>
+> Before you start, you need to create an `Github App` for your organization or Github account.
+> Please visit [here](https://docs.github.com/en/apps/creating-github-apps/registering-a-github-app/registering-a-github-app)
+
+After you registered your app, you need to assign some permissions of your needs.
+
+Developer Settings > Github Apps > Edit > Permissions & events
+
+- Repository permissions:
+    - Contents (read-write)
+    - Discussions (read-write)
+    - Issues (read-write)
+    - Metadata (read-only)
+    - Pull-Request (read-write)
+    - Workflows (read-write)
+
+### Install to your repositories
+
+Developer Settings > Github Apps > Edit > Install App > <Org-or-GH-User> > Only Select repositories > <Your-Repo>
+
+### Get App Info
+
+You need to get `Github App` two fields of information to set repository's secret previously select.
+
+- App-Id
+- Client-Secret
+
+Add those to repository secret as
+
+- APP_ID = App_id
+- APP = Client-Secret
