@@ -13,7 +13,6 @@ The actions either require PAT or Github App to handle automated PRs & (pre)rele
 - To create/stage a pre-release version, you need add a label called `beta` to opened pull request.
 - To create a release version, you need add a label called `release` to closed pull request.
 
-
 > **Note**
 >
 > This CI-CD pipeline do requires Personal Access Token(PAT) to operate.
@@ -172,6 +171,8 @@ git push
 ```
 
 - Create `svg` badge with various tool & upload to `gh-pages` branch
-- Add to your `Readme`
+- Add bagde to your `Readme`
 
+```md
 [![Coverage](https://raw.githubusercontent.com/kaankoken/ci-template/gh-pages/badge.svg)](https://kaankoken.github.io/ci-template/)
+```
