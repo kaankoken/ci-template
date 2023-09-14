@@ -1,0 +1,127 @@
+name: CI
+
+on:
+  pull_request:
+    types: [ opened, synchronize ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  start:
+    runs-on: ubuntu-latest
+    if: |
+      !startsWith(github.event.pull_request.head.ref, 'release')
+    steps:
+      - uses: actions/checkout@v4
+
+  pre-commit:
+    runs-on: ubuntu-latest
+    needs: [ start ]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        id: cp311
+        with:
+          python-version: '3.11.4'
+
+      - uses: actions/cache@v3
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-3|${{ env.pythonLocation }}|${{ hashFiles('.pre-commit-config.yaml') }}
+
+      - uses: pre-commit/action@v3.0.0
+        with:
+          extra_args: --config .pre-commit-config.yaml --verbose --all-files
+
+  spell-check:
+    name: Spell Check with Typos
+    runs-on: ubuntu-latest
+    needs: [ start ]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check spelling with typos
+        uses: crate-ci/typos@master
+        with:
+          config: ./config/_typos.toml
+
+      - name: Spell Check with Cspell
+        uses: streetsidesoftware/cspell-action@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          config: 'cspell.config.yaml'
+          inline: error
+          verbose: true
+
+      - name: Get branch name
+        run: |
+          echo "${{ github.head_ref || github.ref_name }}" > branch_name.txt
+
+      - name: Get PR title
+        run: |
+          echo "${{ github.event.pull_request.title }}" > pr_title.txt
+
+      - name: Check branch & pr title spelling
+        uses: streetsidesoftware/cspell-action@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          config: 'cspell.config.yaml'
+          inline: error
+          verbose: true
+          files: |
+            branch_name.txt
+            pr_title.txt
+
+  commit-lint-check:
+    runs-on: ubuntu-latest
+    needs: [ start ]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+          cache: 'npm'
+
+      - run: npm install .
+
+      - name: Print versions
+        run: |
+          git --version
+          node --version
+          npm --version
+          npx commitlint --version
+
+      - name: Validate current commit (last commit) with commitlint
+        if: github.event_name == 'push'
+        run: npx commitlint --from HEAD~1 --to HEAD --verbose
+
+      - name: Validate PR commits with commitlint
+        if: github.event_name == 'pull_request'
+        run: npx commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
+  # NOTE: job is disabled since is not needed
+  #   pre-commit-lint:
+  #     runs-on: ubuntu-latest
+  #     needs: [ pre-commit, spell-check, commit-lint-check ]
+  #     steps:
+  #       - uses: actions/checkout@v4
+  #       - uses: actions/setup-python@v4
+  #         id: cp311c
+  #         with:
+  #           python-version: '3.11.4'
+  #
+  #       - uses: actions/cache@v3
+  #         with:
+  #           path: ~/.cache/pre-commit
+  #           key: pre-commit-3|${{ env.pythonLocation }}|${{ hashFiles('.pre-commit-lint-config.yaml') }}
+  #
+  #       - uses: pre-commit/action@v3.0.0
+  #         with:
+  #           extra_args: --config .pre-commit-lint-config.yaml --verbose --all-files

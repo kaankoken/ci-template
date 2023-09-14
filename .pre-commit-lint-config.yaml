@@ -1,0 +1,22 @@
+ci:
+  autofix_prs: false
+
+exclude: '.*\.json$'
+
+repos:
+  - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+    rev: v2.10.0
+    hooks:
+      - id: pretty-format-kotlin
+
+  - repo: https://github.com/nicklockwood/SwiftFormat
+    rev: 0.51.15
+    hooks:
+      - id: swiftformat
+        args:
+          - --lint
+
+  - repo: https://github.com/realm/SwiftLint
+    rev: 0.52.4
+    hooks:
+      - id: swiftlint

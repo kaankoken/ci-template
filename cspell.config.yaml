@@ -1,0 +1,32 @@
+version: "0.2"
+ignorePaths:
+  - "**/.vscode/**/"
+  - "**/*.json"
+  - cspell.config.yaml
+  - config/
+  - "**/node_modules/"
+  - .github/workflows/
+  - docs/
+  - .pre-commit-config.yaml
+  - "**/*.sketch"
+  - "**/*.svg"
+dictionaryDefinitions: []
+dictionaries: []
+ignoreWords:
+  - commitlint
+  - conventionalcommits
+  - cocogitto
+  - ktlint
+  - Ktlint
+  - swiftlint
+  - classpath
+  - buildscript
+  - jlleitschuh
+  - autofix
+  - swiftformat
+  - yargi
+  - Yargi
+  - linebreak
+  - elopment
+  - abeta
+import: []

@@ -1,0 +1,14 @@
+# Ignore node modules
+**/node_modules/
+
+# Ignore build files
+**/build/
+**/dist/
+
+# Ignore generated test files
+**/tests/**/*.test.js
+**/tests/**/*.js.map
+
+# Ignore coverage directory
+**/coverage/
+.nyc_output/

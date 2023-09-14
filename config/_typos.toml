@@ -1,0 +1,20 @@
+# URL -> https://github.com/crate-ci/typos
+
+[default.extend-identifiers]
+
+[default]
+extend-ignore-re = ["(?:ure)?"]
+
+[default.extend-words]
+commitlint = "commitlint"
+conventionalcommits = "conventionalcommits"
+[files]
+extend-exclude = [
+  "**/.vscode/**/",
+  "**/*.json",
+  "_typos.toml",
+  "cspell.config.yaml",
+  "docs/CHANGELOG*",
+  "**/*.sketch",
+  "**/*.svg",
+]
