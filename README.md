@@ -5,17 +5,17 @@
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 [![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 
-This a template for CI/CD pipeline mostly focused on mobile app development. However, the most of the CI part could be used in any project.
+This a template for the CI/CD pipeline mostly focused on mobile app development. However, most of the CI parts could be used in any project.
 This template heavily depends on [conventional-commits](https://www.conventionalcommits.org/en/v1.0.0/) & [semver](https://semver.org).
 
-The actions either require PAT or Github App to handle automated PRs & (pre)releases, and the CI follows a [strategy](docs/branching_strategy.md) similar to `Trunk Based` development.
+The actions either require PAT or GitHub App to handle automated PRs & (pre)releases and the CI follows a [strategy](docs/branching_strategy.md) similar to `Trunk Based` development.
 
-- To create/stage a pre-release version, you need add a label called `beta` to opened pull request.
-- To create a release version, you need add a label called `release` to closed pull request.
+- To create/stage a pre-release version, you need to add a label called `beta` to open a pull request.
+- To create a release version, you need to add a label called `release` to close the pull request.
 
 > **Note**
 >
-> This CI-CD pipeline do requires Personal Access Token(PAT) to operate.
+> This CI-CD pipeline do requires a Personal Access Token(PAT) to operate.
 > For more information visit [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
 
 > **Note**
@@ -40,7 +40,7 @@ The CI part contains:
 - Spell check with [typos](https://github.com/crate-ci/typos)
 - Spell check with [CSpell](http://cspell.org)
 - Conventional-commits checks with [commitlint](https://github.com/conventional-changelog/commitlint) (uses angular template)
-- [Pre-commit](https://pre-commit.com) to control/verify belows
+- [Pre-commit](https://pre-commit.com) to control/verify below
 
 To check additional hooks, visit [here](https://pre-commit.com/hooks.html)
 
@@ -110,7 +110,7 @@ plugins {
 
 > **Note**
 >
-> For newer project, you may need to set `JAVA_HOME` to JAVA_17
+> For newer projects, you may need to set `JAVA_HOME` to JAVA_17
 
 <!--
 ### SwiftFormat
@@ -124,32 +124,32 @@ plugins {
 
 ## Auto Update
 
-If the `beta` label attached to PR that merged to the master branch, `auto-update` workflow will detect it, and it will start to process `pre-release` workflow.
-In similar fashion, if the `release` label attached to PR that merged into the master branch, `auto-update` workflow will detect it, and it will start to process `release` workflow.
+If the `beta` label is attached to PR that merged to the master branch, the `auto-update` workflow will detect it, and it will start to process the `pre-release` workflow.
+Similarly, if the `release` label is attached to PR that merged into the master branch, the `auto-update` workflow will detect it, and it will start to process the `release` workflow.
 
 ## Clean Cache
 
-The workflow that responsible to clean caches.
+The workflow that is responsible for cleaning caches.
 
 ## (Pre)Release
 
-The both of the workflows work in a similar fashion:
+Both of the workflows work similarly:
 
 - They will analyze the commits.
 - They will create a new `release/tag` if the commits are suitable.
 - They will update the release notes.
 - They will create a PR for the changed files.
 
-The rest of the customization totally depend on a project.
+The rest of the customization depends on the project.
 
 ## Github Pages for a badge/test results
 
 > **Note**
 >
-> You have to enable `pages` for your github account or for the organization.
+> You have to enable `pages` for your GitHub account or the organization.
 > Please visit [here](https://pages.github.com) to start.
 
-- Create `github-pages` for this repository
+- Create `pages` for this repository
 
 ```bash
 # checkout gh-pages branch from master
@@ -177,7 +177,7 @@ git commit -m "initial commit"
 git push
 ```
 
-- Create `svg` badge with various tool & upload to `gh-pages` branch
+- Create `svg` badge with various tools & upload it to `gh-pages` branch
 - Add badge to your `Readme`
 
 ```md
@@ -188,10 +188,10 @@ git push
 
 > **Note**
 >
-> Before you start, you need to create an `Github App` for your organization or Github account.
+> Before you start, you need to create a `Github App` for your organization or Github account.
 > Please visit [here](https://docs.github.com/en/apps/creating-github-apps/registering-a-github-app/registering-a-github-app)
 
-After you registered your app, you need to assign some permissions of your needs.
+After you register your app, you need to assign some permissions for your needs.
 
 Developer Settings > Github Apps > Edit > Permissions & events
 
@@ -209,12 +209,12 @@ Developer Settings > Github Apps > Edit > Install App > <Org-or-GH-User> > Only 
 
 ### Get App Info
 
-You need to get `Github App` two fields of information to set repository's secret previously select.
+You need to get the `Github App` two fields of information to set the repository's secret previously selected.
 
 - App-Id
 - private-key
 
-Add those to repository secret as
+Add those to the repository secret as
 
 - APP_ID = App_id
 - APP = private-key
